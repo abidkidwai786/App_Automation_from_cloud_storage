@@ -24,8 +24,8 @@ import java.util.Base64;
 import java.util.Set;
 
 public class appdownloadDC {
-    public static final String userName = "shubhamr";
-    public static final String accessKey = "M1hTTfelp95y0WKq0MSKORBzWD7xpFGOTv5KlMTZ18qnAcGjId";
+    public static final String userName = "";
+    public static final String accessKey = "";
     public static final String URL = "https://" + userName + ":" + accessKey + "@beta-hub.lambdatest.com/wd/hub";
     public static  FileOutputStream fos = null;
     public static  File file=null;
@@ -38,6 +38,9 @@ public class appdownloadDC {
 
 
     public static void main(String[] args) throws Exception {
+        
+        
+        //------------------------------------Get an app from any of the cloud Storage with authorization with access token--------------
 
         OkHttpClient client_1 = new OkHttpClient().newBuilder()
                 .build();
@@ -65,7 +68,7 @@ public class appdownloadDC {
         Thread.sleep(5000);
 
 
-
+        //---------------------------------------get encoding base 64 using username and access key for authorization on lambdatest------------------
 
 
         String encoding = Base64.getEncoder().encodeToString((userName + ":" + accessKey).getBytes("UTF-8"));
@@ -87,7 +90,7 @@ public class appdownloadDC {
         String app_url=obj.get("app_url").toString();
         System.out.println("App Uploaded");
 
-
+        //--------------------------Declared capabilities--------------------------
 
         DesiredCapabilities caps = new DesiredCapabilities();
         caps.setCapability("platformVersion", "10");
@@ -100,7 +103,7 @@ public class appdownloadDC {
         caps.setCapability("devicelog",true);
         caps.setCapability("network",true);
 
-
+        //-----------------------------Test----------------------------------------
         AndroidDriver<AndroidElement> driver = new AndroidDriver<AndroidElement>(new URL("https://"+userName+":"+accessKey+"@beta-hub.lambdatest.com/wd/hub"), caps);
 
         driver.findElement(MobileBy.AccessibilityId("Search Wikipedia")).click();
@@ -112,7 +115,7 @@ public class appdownloadDC {
         System.out.println("Test Passed");
         driver.quit();
 
-
+        //--------------------------Deletion of apk file from the source location-----------------------------------
         file.delete();
 
 
